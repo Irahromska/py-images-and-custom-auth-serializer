@@ -36,9 +36,10 @@ class UserManager(DjangoUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         if password is None:
-          password = ""
+            password = ""
 
         return self._create_user(email, password, **extra_fields)
+
 
 class User(AbstractUser):
     username = None
