@@ -1,15 +1,6 @@
 from django.db import transaction
 from rest_framework import serializers
-
-from cinema.models import (
-    Genre,
-    Actor,
-    CinemaHall,
-    Movie,
-    MovieSession,
-    Ticket,
-    Order,
-)
+from cinema.models import Genre, Actor, CinemaHall, Movie, MovieSession, Ticket, Order
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -31,6 +22,8 @@ class CinemaHallSerializer(serializers.ModelSerializer):
 
 
 class MovieImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField()
+
     class Meta:
         model = Movie
         fields = ("id", "image")
@@ -89,8 +82,8 @@ class MovieSessionListSerializer(MovieSessionSerializer):
     )
     tickets_available = serializers.IntegerField(read_only=True)
     movie_image = serializers.ImageField(
-        source="movie.image",
-        read_only=True)
+        source="movie.image", read_only=True
+    )
 
     class Meta:
         model = MovieSession
@@ -134,9 +127,6 @@ class MovieSessionDetailSerializer(MovieSessionSerializer):
     taken_places = TicketSeatsSerializer(
         source="tickets", many=True, read_only=True
     )
-    movie_image = serializers.ImageField(
-        source="movie.image",
-        read_only=True)
 
     class Meta:
         model = MovieSession
@@ -146,7 +136,6 @@ class MovieSessionDetailSerializer(MovieSessionSerializer):
             "movie",
             "cinema_hall",
             "taken_places",
-            "movie_image"
         )
 
 
