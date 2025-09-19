@@ -10,6 +10,7 @@ from cinema.models import (
     Order,
 )
 
+
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre

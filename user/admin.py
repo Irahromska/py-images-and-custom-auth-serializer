@@ -6,7 +6,7 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
-     """
+    """
     Define admin model for custom User model with no username field.
     Email is the USERNAME_FIELD.
     """
@@ -28,6 +28,7 @@ class UserAdmin(DjangoUserAdmin):
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
+
     add_fieldsets = (
         (
             None,
@@ -37,6 +38,7 @@ class UserAdmin(DjangoUserAdmin):
             },
         ),
     )
+
     list_display = ("email", "first_name", "last_name", "is_staff")
     search_fields = ("email", "first_name", "last_name")
     ordering = ("email",)
